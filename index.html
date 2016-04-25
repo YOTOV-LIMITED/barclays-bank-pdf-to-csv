@@ -1,72 +1,96 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
-    <style type="text/css">
-      /* Original HTML credit:
-      HTML5 File Drag & Drop demonstration
-      Featured on SitePoint.com, Craig Buckler (@craigbuckler) of OptimalWorks.net
-      */
-      body {
-      	font-family: "Segoe UI", Tahoma, Helvetica, freesans, sans-serif;
-      	font-size: 90%;
-      	margin: 10px;
-      	color: #333;
-      	background-color: #fff;
-      }
-      h1, h2 {
-      	font-size: 1.5em;
-      	font-weight: normal;
-      }
-      h2 {
-      	font-size: 1.3em;
-      }
-      legend {
-      	font-weight: bold;
-      	color: #333;
-      }
-      #filedrag {
-      	display: none;
-      	font-weight: bold;
-      	text-align: center;
-      	padding: 1em 0;
-      	margin: 1em 0;
-      	color: #555;
-      	border: 2px dashed #555;
-      	border-radius: 7px;
-      	cursor: default;
-      }
-      #filedrag.hover {
-      	color: #f00;
-      	border-color: #f00;
-      	border-style: solid;
-      	box-shadow: inset 0 3px 4px #888;
-      }
-      #messages {
-      	padding: 0 10px;
-      	margin: 1em 0;
-      	border: 1px solid #999;
-      }
-      #the-canvas {
-        border: 1px solid black;
-      }
-    </style>
-    <script src="pdf.combined.js"></script>
-    <script src="statement-parser-lib.js"></script>
+    <meta charset="UTF-8">
+    <title>Barclays-bank-pdf-to-csv by YOTOV-LIMITED</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
   <body>
-    <form id="upload" action="" method="POST" enctype="multipart/form-data">
-      <fieldset>
-        <legend>Barclays Bank statement PDF to CSV</legend>
-        <div>
-        	<div id="filedrag">drop PDF file here - important: no information will leave your browser</div>
-        </div>
-      </fieldset>
-    </form>
-    <div id="messages">
-      <p>Status Messages</p>
-    </div>
-    <h2>Cover sheet of your bank statement will appear here</h2>
-    <canvas id="the-canvas" />
-    <script src="browser-parser.js"></script>
+    <section class="page-header">
+      <h1 class="project-name">Barclays-bank-pdf-to-csv</h1>
+      <h2 class="project-tagline">Converts Barclays Bank PDF statements to CSV</h2>
+      <a href="https://github.com/YOTOV-LIMITED/barclays-bank-pdf-to-csv" class="btn">View on GitHub</a>
+      <a href="https://github.com/YOTOV-LIMITED/barclays-bank-pdf-to-csv/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/YOTOV-LIMITED/barclays-bank-pdf-to-csv/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="barclays-bank-statement-pdf-to-csv" class="anchor" href="#barclays-bank-statement-pdf-to-csv" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Barclays Bank statement PDF-to-CSV</h1>
+
+<p>NB: This only works with Business account statements! Support for personal account statements is planned, pending getting hold of an appropriate PDF.</p>
+
+<p>Reads Barclays Bank statements and extracts transactions. Validates transactions against the total payments and receipts shown in the top-right of the bank statement.</p>
+
+<p>Tested against 18 months' worth of bank statements exported in September 2014.</p>
+
+<p>Built on <a href="http://mozilla.github.io/pdf.js/">Mozilla PDF.JS</a>, which is marvellous.</p>
+
+<p>In-browser version online at: <a href="http://penrosestudio.com/barclays-bank-pdf-to-csv/">http://penrosestudio.com/barclays-bank-pdf-to-csv/</a></p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Clone the git repository, then install dependencies:</p>
+
+<pre><code>git clone https://github.com/penrosestudio/barclays-bank-pdf-to-csv.git
+npm install
+</code></pre>
+
+<h2>
+<a id="usage-under-nodejs" class="anchor" href="#usage-under-nodejs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage under Node.js</h2>
+
+<pre><code>node statement-parser &lt;folder&gt;
+</code></pre>
+
+<p><code>&lt;folder&gt;</code> should be a directory containing Barclays Bank statement PDFs.</p>
+
+<h2>
+<a id="usage-in-a-browser" class="anchor" href="#usage-in-a-browser" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage in a browser</h2>
+
+<p>Open index.html in a browser and drop a PDF onto the drop-zone.</p>
+
+<p>Browsers tested and compatible:</p>
+
+<ul>
+<li>Mac OS X 10.9.5:
+
+<ul>
+<li>Chrome 40.0</li>
+<li>Safari 7.0.6</li>
+<li>Firefox 35.0.1</li>
+</ul>
+</li>
+<li>Windows 7:
+
+<ul>
+<li>Firefox 36.0</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="output" class="anchor" href="#output" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Output</h2>
+
+<p>A single CSV file will be created called <code>statements.csv</code>.</p>
+
+<h2>
+<a id="issues" class="anchor" href="#issues" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Issues</h2>
+
+<p>Please submit any problems as <a href="https://github.com/penrosestudio/barclays-bank-pdf-to-csv/issues">GitHub issues</a> on this repository.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/YOTOV-LIMITED/barclays-bank-pdf-to-csv">Barclays-bank-pdf-to-csv</a> is maintained by <a href="https://github.com/YOTOV-LIMITED">YOTOV-LIMITED</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
   </body>
 </html>
